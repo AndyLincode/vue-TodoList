@@ -1,5 +1,5 @@
 <template>
-  <ul class="list container flex flex-col items-center">
+  <ul class="list container flex flex-col items-center mx-auto">
     <li v-for="(todo, i) in props.todos" :key="todo.id"
       class="flex justify-between items-center text-2xl my-2  w-[300px] bg-slate-200 rounded p-2 text-cyan-500">
       <div v-if="editedTodo !== todo" class="flex items-center">
@@ -19,6 +19,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 // 接收父傳子
 const props = defineProps({
   todos: Array,
@@ -29,6 +31,22 @@ const handleRemove = index => {
   // 第一個參數 引發父組件的 removeTodo 事件
   // 第二個參數 傳遞到 removeTodo 事件發生要執行的方法的資料
   emit('removeTodo', index)
+}
+
+const editedTodo = ref(null)
+const beforeEditCache = ref('')
+
+const editTodo = todo => {
+  editedTodo.value = todo
+  beforeEditCache.value = todo.title
+}
+const doneEdit = todo => {
+  todo.title = todo.title.trim()
+  editedTodo.value = null
+}
+const cancelEdit = todo => {
+  todo.title = beforeEditCache.value
+  editedTodo.value = null
 }
 </script>
 

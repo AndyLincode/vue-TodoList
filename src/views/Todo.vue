@@ -6,11 +6,11 @@
     class="block w-[300px] h-10 rounded-md border border-blue-500 pl-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mx-auto my-5"
     placeholder="輸入代辦事項">
   <TodoList :todos="todos.data" @removeTodo="removeTodo"></TodoList>
-  <TodoFooter :message="message"></TodoFooter>
+  <TodoFooter :remaining="remaining" @removeCompleted="removeCompleted"></TodoFooter>
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, computed } from 'vue';
 import TodoFooter from '../components/TodoFooter.vue';
 import TodoList from '../components/TodoList.vue';
 
@@ -25,7 +25,7 @@ const addTodo = () => {
   if (!newTodo.value) {
     return
   }
-  todos.data.push({ "id": todos.length > 0 ? todos[todos.length - 1].id + 1 : 1, "title": newTodo.value, "completed": false })
+  todos.data.push({ "id": todos.data.length > 0 ? todos.data[todos.data.length - 1].id + 1 : 1, "title": newTodo.value, "completed": false })
   newTodo.value = '';
 }
 // 從子組間傳遞要刪除的 todo 到父組件
@@ -37,6 +37,16 @@ const removeTodo = index => {
 watch(todos, (newTodos, oldTodos) => {
   localStorage.setItem('todos', JSON.stringify(newTodos.data))
 }, { deep: true })
+
+const remaining = computed(() => {
+  let activeTodos = todos.data.filter(todo => !todo.completed)
+  return activeTodos.length
+})
+
+const removeCompleted = () => {
+  const doneItem = todos.data.filter(e => !e.completed);
+  todos.data = doneItem;
+}
 
 </script>
 
