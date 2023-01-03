@@ -1,4 +1,4 @@
 export default defineConfig({
-  base: "./blog/",
+  base: "./",
   plugins: [vue()],
 });
