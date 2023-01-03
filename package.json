@@ -6,8 +6,7 @@
   "homepage": "https://andylincode.github.io/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/vue-TodoList/",
-    "deploy": "sh deploy.sh",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
