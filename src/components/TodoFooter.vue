@@ -1,5 +1,5 @@
 <template>
-  <div class=" flex justify-center">
+  <div class=" flex justify-center mt-3">
     <strong>尚有 <span class="text-red-600">{{ remaining }}</span> 個事項未完成</strong>
     <button class="bg-orange-500 w-44 rounded-xl text-white hover:bg-orange-700" @click="removeDone">清除已完成</button>
   </div>
