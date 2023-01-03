@@ -6,8 +6,7 @@
   "homepage": "https://andylincode.github.io/vue-TodoList/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "predeploy": "npm run build",
+    "build": "vite build --base=/vue-TodoList/",
     "deploy": "sh deploy.sh",
     "preview": "vite preview"
   },
