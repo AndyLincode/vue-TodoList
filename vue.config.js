@@ -1,4 +1,4 @@
 export default defineConfig({
-  base: "./vue-TodoList/",
+  base: "./",
   plugins: [vue()],
 });
